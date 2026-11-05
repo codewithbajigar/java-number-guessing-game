@@ -1,4 +1,3 @@
-
 package projects;
 
 import java.util.Random;
@@ -13,28 +12,18 @@ public class GuessTheNumber {
     static final int MAX = 100;
     static final int MAX_ATTEMPTS = 7;
 
-    // Overall game statistics
     static int totalGames = 0;
     static int totalWins = 0;
     static int totalLosses = 0;
     static int totalGuesses = 0;
     static int bestAttempts = Integer.MAX_VALUE;
 
-    // Terminal colors
-    static final String RESET = "\u001B[0m";
-    static final String GREEN = "\u001B[32m";
-    static final String RED = "\u001B[31m";
-    static final String YELLOW = "\u001B[33m";
-    static final String CYAN = "\u001B[36m";
-    static final String BLUE = "\u001B[34m";
-    static final String BOLD = "\u001B[1m";
-
     public static void main(String[] args) {
 
         clearLine();
         printBanner();
 
-        System.out.print(CYAN + "Enter your name: " + RESET);
+        System.out.print("Enter your name: ");
         String name = sc.nextLine().trim();
 
         if (name.isEmpty()) {
@@ -42,9 +31,7 @@ public class GuessTheNumber {
         }
 
         System.out.println();
-        System.out.println(GREEN + BOLD
-                + "Welcome, " + name + "! Let's test your guessing skills."
-                + RESET);
+        System.out.println("Welcome, " + name + "! Let's test your guessing skills.");
 
         System.out.println("Guess a number from 1 to 100.");
         System.out.println("You have 7 valid attempts in every round.");
@@ -65,9 +52,7 @@ public class GuessTheNumber {
 
             showScoreboard();
 
-            System.out.print("\n" + YELLOW
-                    + "Would you like to play again? (yes/no): "
-                    + RESET);
+            System.out.print("\nWould you like to play again? (yes/no): ");
 
             String choice = sc.nextLine().trim();
 
@@ -75,9 +60,7 @@ public class GuessTheNumber {
                     || choice.equalsIgnoreCase("y")) {
 
                 System.out.println();
-                System.out.println(CYAN
-                        + "Starting a new round... Good luck!"
-                        + RESET);
+                System.out.println("Starting a new round... Good luck!");
 
             } else {
                 playAgain = false;
@@ -92,12 +75,10 @@ public class GuessTheNumber {
     // Display game banner
     static void printBanner() {
 
-        System.out.println(CYAN + BOLD);
         System.out.println("==========================================");
         System.out.println("       NUMBER GUESSING CHALLENGE");
         System.out.println("==========================================");
-        System.out.println(RESET);
-        System.out.println("             THINK & GUESS!");
+        System.out.println("           WELCOME TO CODE_WITH_BAJIGAR ");
         System.out.println("------------------------------------------");
     }
 
@@ -107,16 +88,13 @@ public class GuessTheNumber {
         int number = random.nextInt(MAX - MIN + 1) + MIN;
         int attempts = 0;
 
-        System.out.println("\n" + BLUE + BOLD
-                + "--------------- NEW ROUND ---------------"
-                + RESET);
+        System.out.println("\n--------------- NEW ROUND ---------------");
 
         while (attempts < MAX_ATTEMPTS) {
 
-            System.out.print("\n" + CYAN
-                    + "Attempt " + (attempts + 1)
+            System.out.print("\nAttempt " + (attempts + 1)
                     + "/" + MAX_ATTEMPTS
-                    + " | Enter your guess: " + RESET);
+                    + " | Enter your guess: ");
 
             String input = sc.nextLine().trim();
 
@@ -125,16 +103,12 @@ public class GuessTheNumber {
             try {
                 guess = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println(RED
-                        + "Invalid input! Enter a whole number."
-                        + RESET);
+                System.out.println("Invalid input! Enter a whole number.");
                 continue;
             }
 
             if (guess < MIN || guess > MAX) {
-                System.out.println(RED
-                        + "Please enter a number between 1 and 100."
-                        + RESET);
+                System.out.println("Please enter a number between 1 and 100.");
                 continue;
             }
 
@@ -143,34 +117,35 @@ public class GuessTheNumber {
 
             if (guess == number) {
 
-                System.out.println("\n" + GREEN + BOLD+ "******************************************");
+                System.out.println("\n******************************************");
                 System.out.println("             CONGRATULATIONS!");
                 System.out.println("              YOU WON!");
-                System.out.println("******************************************"+ RESET);
+                System.out.println("******************************************");
 
-                System.out.println(GREEN+ "Correct number : " + number);
-                System.out.println("Attempts used  : " + attempts+ RESET);
+                System.out.println("Correct number : " + number);
+                System.out.println("Attempts used  : " + attempts);
 
                 if (attempts < bestAttempts) {
                     bestAttempts = attempts;
-                    System.out.println(YELLOW+ "New personal best! Excellent work!"+ RESET);
+                    System.out.println("New personal best! Excellent work!");
                 }
 
                 return true;
 
             } else if (guess > number) {
 
-                System.out.println(YELLOW+ "Too HIGH! Try a lower number."+ RESET);
+                System.out.println("Too HIGH! Try a lower number.");
 
             } else {
 
-                System.out.println(YELLOW+ "Too LOW! Try a higher number."+ RESET);
+                System.out.println("Too LOW! Try a higher number.");
             }
 
-            System.out.println("Attempts remaining: "+ (MAX_ATTEMPTS - attempts));
+            System.out.println("Attempts remaining: "
+                    + (MAX_ATTEMPTS - attempts));
         }
 
-        System.out.println("\n" + RED + BOLD+ "GAME OVER! YOU LOST THIS ROUND."+ RESET);
+        System.out.println("\nGAME OVER! YOU LOST THIS ROUND.");
 
         System.out.println("The correct number was: " + number);
 
@@ -182,17 +157,13 @@ public class GuessTheNumber {
 
         double winRate = (totalWins * 100.0) / totalGames;
 
-        System.out.println("\n" + CYAN + BOLD);
-        System.out.println("==========================================");
+        System.out.println("\n==========================================");
         System.out.println("             YOUR SCOREBOARD");
         System.out.println("==========================================");
-        System.out.println(RESET);
 
         System.out.printf("Total Games   : %d%n", totalGames);
-
-        System.out.println(GREEN + "Total Wins    : "+ totalWins + RESET);
-
-        System.out.println(RED + "Total Losses  : "+ totalLosses + RESET);
+        System.out.println("Total Wins    : " + totalWins);
+        System.out.println("Total Losses  : " + totalLosses);
 
         System.out.printf("Win Rate      : %.2f%%%n", winRate);
 
@@ -212,22 +183,17 @@ public class GuessTheNumber {
 
         double winRate = (totalWins * 100.0) / totalGames;
 
-        System.out.println("\n" + CYAN + BOLD);
-        System.out.println("==========================================");
+        System.out.println("\n==========================================");
         System.out.println("              FINAL REPORT");
         System.out.println("==========================================");
-        System.out.println(RESET);
 
         System.out.println("Player        : " + name);
         System.out.println("Games Played  : " + totalGames);
-
-        System.out.println(GREEN + "Games Won     : "
-                + totalWins + RESET);
-
-        System.out.println(RED + "Games Lost    : "
-                + totalLosses + RESET);
+        System.out.println("Games Won     : " + totalWins);
+        System.out.println("Games Lost    : " + totalLosses);
 
         System.out.printf("Win Rate      : %.2f%%%n", winRate);
+
         System.out.println("Total Guesses : " + totalGuesses);
 
         if (bestAttempts == Integer.MAX_VALUE) {
@@ -239,17 +205,16 @@ public class GuessTheNumber {
         System.out.println();
 
         if (totalWins > totalLosses) {
-            System.out.println(GREEN+ "Great job! You won more games than you lost."+ RESET);
+            System.out.println("Great job! You won more games than you lost.");
         } else if (totalWins == totalLosses) {
-            System.out.println(YELLOW+ "Well played! Your wins and losses are equal."+ RESET);
+            System.out.println("Well played! Your wins and losses are equal.");
         } else {
-            System.out.println(YELLOW+ "Keep practicing. You can improve your score!"+ RESET);
+            System.out.println("Keep practicing. You can improve your score!");
         }
 
-        System.out.println("\n" + CYAN + BOLD
-                + "Thank you for playing, " + name + "!");
+        System.out.println("\nThank you for playing, " + name + "!");
         System.out.println("See you next time!");
-        System.out.println("=========================================="+ RESET);
+        System.out.println("==========================================");
     }
 
     static void clearLine() {
